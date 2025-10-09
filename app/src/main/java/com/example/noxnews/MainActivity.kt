@@ -17,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainActivity : AppCompatActivity() {
 
 
-        //https://newsapi.org/v2/top-headlines?country=us&category=general&apiKey=e145d0ed4d974df59b294a451d4d4e96&pageSize=30
+    //https://newsapi.org/v2/top-headlines?country=us&category=general&apiKey=e145d0ed4d974df59b294a451d4d4e96&pageSize=30
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
