@@ -19,11 +19,19 @@ class SignUpActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        if (FirebaseService.auth.currentUser != null) {
+            val intent = Intent(this, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
+            startActivity(intent)
+            finish()
+            return
+        }// skips login if logged in, also exits app without returning to sign up.
 
         binding.tvLogin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
@@ -31,18 +39,37 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         binding.btnSignup.setOnClickListener {
-            val name = binding.etName.text.toString()
-            val email = binding.etEmail.text.toString()
-            val password = binding.etPassword.text.toString()
+            val name = binding.etName.text.toString().trim()
+            val email = binding.etEmail.text.toString().trim()
+            val password = binding.etPassword.text.toString().trim()
 
-            if (email.isBlank() || password.isBlank() || name.isBlank())
-                Toast.makeText(this, "Missing field/s", Toast.LENGTH_SHORT).show()
-            else if (password.length < 6)
-                Toast.makeText(this, "Short Password", Toast.LENGTH_SHORT).show()
-            else {
-                binding.loadingProgress.isVisible = true
-                // sign up code
+            when {
+                name.isEmpty() || email.isEmpty() || password.isEmpty() -> {
+                    Toast.makeText(this, "there are no such thing as void emails, this isn't galactic express", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                password.length < 6 -> {
+                    Toast.makeText(this, "Password too short (min 6 chars)", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
             }
+
+            binding.btnSignup.isEnabled = false
+            binding.loadingProgress.isVisible = true
+
+            AuthRepository.signUp(name,email, password)
+                .addOnSuccessListener {
+                    val intent = Intent(this, MainActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    }
+                    startActivity(intent)
+                    finish()
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(this, "Signup failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                    binding.btnSignup.isEnabled = true
+                    binding.loadingProgress.isVisible = false
+                }
 
         }
 
