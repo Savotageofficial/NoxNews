@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Nox News"
+rootProject.name = "NoxNews"
 include(":app")
  

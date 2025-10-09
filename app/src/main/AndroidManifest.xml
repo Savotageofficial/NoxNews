@@ -14,27 +14,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NoxNews"
         android:usesCleartextTraffic="true">
+
+        <!-- Login Activity (optional entry after Sign Up) -->
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
+
+        <!-- Sign Up Activity - App Entry Point -->
         <activity
             android:name=".SignUpActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Main Activity - Home screen after login/signup -->
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>
+
+<!--chat gpt fixed this file, he says two activity were set to main launcher-->
