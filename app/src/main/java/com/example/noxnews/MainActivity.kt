@@ -42,20 +42,22 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-    private fun loadNews(conID : String? , catID : String?){
+    private fun loadNews(conID : String , catID : String){
         val retro = Retrofit
             .Builder()
             .baseUrl("https://newsapi.org")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val c = retro.create(NewsCallable::class.java)
+
+
         c.getNews(countryID = conID , categoryID = catID).enqueue(object : Callback<News>{
             override fun onResponse(
                 call: Call<News?>,
                 response: Response<News?>
             ) {
                 val news = response.body()
-                val articles = news?.articles!!
+                val articles = news?.articles ?: arrayListOf()
 
                 articles.removeAll{
                     it.title == "[Removed]"
