@@ -31,15 +31,18 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         val recievedcategory = intent.getStringExtra("catID")
-        val recievedcountry = "eg"
+        val recievedcountry = "us"
 
-        loadNews(conID = recievedcountry , catID = recievedcountry)
+        Log.d("trace" , recievedcategory!!)
+        Log.d("trace" , recievedcountry)
 
-        binding.swipeRefresh.setOnRefreshListener { loadNews(conID = recievedcountry , catID = recievedcountry) }
+        loadNews(conID = recievedcountry , catID = recievedcategory)
+
+        binding.swipeRefresh.setOnRefreshListener { loadNews(conID = recievedcountry , catID = recievedcategory) }
 
 
     }
-    private fun loadNews(conID : String , catID : String){
+    private fun loadNews(conID : String? , catID : String?){
         val retro = Retrofit
             .Builder()
             .baseUrl("https://newsapi.org")

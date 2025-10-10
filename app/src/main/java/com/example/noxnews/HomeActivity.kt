@@ -27,36 +27,42 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this , MainActivity::class.java)
             intent.putExtra("catID" , "general")
             startActivity(intent)
+            finish()
         }
         binding.btn2.setOnClickListener {
 
             val intent = Intent(this , MainActivity::class.java)
             intent.putExtra("catID" , "sports")
             startActivity(intent)
+            finish()
         }
         binding.btn3.setOnClickListener {
 
             val intent = Intent(this , MainActivity::class.java)
             intent.putExtra("catID" , "entertainment")
             startActivity(intent)
+            finish()
         }
         binding.btn4.setOnClickListener {
 
             val intent = Intent(this , MainActivity::class.java)
             intent.putExtra("catID" , "health")
             startActivity(intent)
+            finish()
         }
         binding.btn5.setOnClickListener {
 
             val intent = Intent(this , MainActivity::class.java)
             intent.putExtra("catID" , "science")
             startActivity(intent)
+            finish()
         }
         binding.btn6.setOnClickListener {
 
             val intent = Intent(this , MainActivity::class.java)
             intent.putExtra("catID" , "technology")
             startActivity(intent)
+            finish()
         }
 
     }
