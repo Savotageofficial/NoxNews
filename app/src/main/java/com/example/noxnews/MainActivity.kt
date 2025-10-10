@@ -1,5 +1,6 @@
 package com.example.noxnews
 
+import android.R
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -29,21 +30,23 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val recievedcategory = intent.getStringExtra("catID")
+        val recievedcountry = "eg"
 
-        loadNews()
+        loadNews(conID = recievedcountry , catID = recievedcountry)
 
-        binding.swipeRefresh.setOnRefreshListener { loadNews() }
+        binding.swipeRefresh.setOnRefreshListener { loadNews(conID = recievedcountry , catID = recievedcountry) }
 
 
     }
-    private fun loadNews(){
+    private fun loadNews(conID : String , catID : String){
         val retro = Retrofit
             .Builder()
             .baseUrl("https://newsapi.org")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val c = retro.create(NewsCallable::class.java)
-        c.getNews().enqueue(object : Callback<News>{
+        c.getNews(countryID = conID , categoryID = catID).enqueue(object : Callback<News>{
             override fun onResponse(
                 call: Call<News?>,
                 response: Response<News?>
