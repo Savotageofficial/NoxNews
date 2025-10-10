@@ -51,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
             binding.btnLogin.isEnabled = false
 
             AuthRepository.login(email, password).addOnSuccessListener {
-                val intent = Intent(this, MainActivity::class.java).apply {
+                val intent = Intent(this, HomeActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 }// DON'T DELETE THIS, it exits the app if pressed on back instead of login screen
                 startActivity(intent)
