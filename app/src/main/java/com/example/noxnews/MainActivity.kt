@@ -3,6 +3,7 @@ package com.example.noxnews
 import android.R
 import android.os.Bundle
 import android.util.Log
+import android.window.OnBackInvokedDispatcher
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -14,6 +15,11 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import androidx.activity.addCallback
+import androidx.navigation.*
+import androidx.activity.OnBackPressedDispatcher
+import androidx.activity.OnBackPressedCallback
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,6 +39,8 @@ class MainActivity : AppCompatActivity() {
         val recievedcategory = intent.getStringExtra("catID")
         val recievedcountry = "us"
 
+        binding.genreTv.text = recievedcategory
+
         Log.d("trace" , recievedcategory!!)
         Log.d("trace" , recievedcountry)
 
@@ -41,7 +49,13 @@ class MainActivity : AppCompatActivity() {
         binding.swipeRefresh.setOnRefreshListener { loadNews(conID = recievedcountry , catID = recievedcategory) }
 
 
+
+        onBackPressedDispatcher.addCallback(this ) {
+            // Back is pressed... Finishing the activity
+            finish()
+        }
     }
+
     private fun loadNews(conID : String , catID : String){
         val retro = Retrofit
             .Builder()
@@ -82,5 +96,9 @@ class MainActivity : AppCompatActivity() {
         binding.newsList.adapter = adapter
 
     }
+
+
+
+
 
 }
