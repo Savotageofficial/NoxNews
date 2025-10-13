@@ -64,5 +64,11 @@ class HomeActivity : AppCompatActivity() {
 
         }
 
+        binding.settingsText.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
+        }
+
+
     }
 }
