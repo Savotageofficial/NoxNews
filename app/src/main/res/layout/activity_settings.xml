@@ -67,6 +67,7 @@
             app:tint="#FFD700"/>
 
         <TextView
+            android:id="@+id/favourites"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Favourites"
@@ -91,6 +92,7 @@
             app:tint="#FF5252"/>
 
         <TextView
+            android:id="@+id/logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Log Out"

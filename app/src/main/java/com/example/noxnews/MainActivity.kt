@@ -36,8 +36,11 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        // youssef added country shared pref
+        val sharedPref = getSharedPreferences("AppSettings", MODE_PRIVATE)
         val recievedcategory = intent.getStringExtra("catID")
-        val recievedcountry = "us"
+        val recievedcountry = sharedPref.getString("region", "eg") ?: "eg"
 
         binding.genreTv.text = recievedcategory
 
@@ -65,7 +68,8 @@ class MainActivity : AppCompatActivity() {
         val c = retro.create(NewsCallable::class.java)
 
 
-        c.getNews(countryID = conID , categoryID = catID).enqueue(object : Callback<News>{
+
+        c.getNews(countryID = conID  , categoryID = catID).enqueue(object : Callback<News>{
             override fun onResponse(
                 call: Call<News?>,
                 response: Response<News?>
