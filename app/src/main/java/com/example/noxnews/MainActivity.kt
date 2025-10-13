@@ -1,9 +1,7 @@
 package com.example.noxnews
 
-import android.R
 import android.os.Bundle
 import android.util.Log
-import android.window.OnBackInvokedDispatcher
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,9 +14,6 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import androidx.activity.addCallback
-import androidx.navigation.*
-import androidx.activity.OnBackPressedDispatcher
-import androidx.activity.OnBackPressedCallback
 
 
 class MainActivity : AppCompatActivity() {
@@ -39,17 +34,17 @@ class MainActivity : AppCompatActivity() {
 
         // youssef added country shared pref
         val sharedPref = getSharedPreferences("AppSettings", MODE_PRIVATE)
-        val recievedcategory = intent.getStringExtra("catID")
-        val recievedcountry = sharedPref.getString("region", "eg") ?: "eg"
+        val receivedCategory = intent.getStringExtra("catID")
+        val receivedCountry = sharedPref.getString("region", "eg") ?: "eg"
 
-        binding.genreTv.text = recievedcategory
+        binding.genreTv.text = receivedCategory
 
-        Log.d("trace" , recievedcategory!!)
-        Log.d("trace" , recievedcountry)
+        Log.d("trace" , receivedCategory!!)
+        Log.d("trace" , receivedCountry)
 
-        loadNews(conID = recievedcountry , catID = recievedcategory)
+        loadNews(conID = receivedCountry , catID = receivedCategory)
 
-        binding.swipeRefresh.setOnRefreshListener { loadNews(conID = recievedcountry , catID = recievedcategory) }
+        binding.swipeRefresh.setOnRefreshListener { loadNews(conID = receivedCountry , catID = receivedCategory) }
 
 
 
