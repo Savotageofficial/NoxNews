@@ -59,6 +59,16 @@
             android:src="@drawable/share"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/favadd_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/baseline_star_outline_24"
+            app:layout_constraintEnd_toStartOf="@id/share_fab"
+            app:layout_constraintTop_toTopOf="@id/share_fab"
+            app:layout_constraintBottom_toBottomOf="@id/share_fab"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

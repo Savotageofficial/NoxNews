@@ -2,9 +2,13 @@ package com.example.noxnews
 
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.app.ShareCompat
+import androidx.core.graphics.drawable.toBitmap
+import androidx.core.graphics.drawable.toDrawable
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.recyclerview.widget.RecyclerView.Adapter
@@ -51,6 +55,10 @@ class NewsAdapter(val a: Activity, val articles: ArrayList<Article>) :
                 .setChooserTitle("share article with:")
                 .setText(url)
                 .startChooser()
+
+        }
+        holder.binding.favaddBtn.setOnClickListener {
+                holder.binding.favaddBtn.setImageResource(R.drawable.baseline_star_24)
 
         }
     }

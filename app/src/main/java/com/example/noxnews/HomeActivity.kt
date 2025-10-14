@@ -2,11 +2,16 @@ package com.example.noxnews
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.noxnews.databinding.ActivityHomeBinding
+import javax.annotation.Nonnull
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,11 +69,38 @@ class HomeActivity : AppCompatActivity() {
 
         }
 
-        binding.settingsText.setOnClickListener {
-            val intent = Intent(this, SettingsActivity::class.java)
-            startActivity(intent)
+//        binding.settings.setOnClickListener {
+//            val intent = Intent(this, SettingsActivity::class.java)
+//            startActivity(intent)
+//        }
+
+        val toolbar = binding.toolbar
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        menuInflater.inflate(R.menu.menu , menu)
+        return super.onCreateOptionsMenu(menu)
+
+    }
+
+    override fun onOptionsItemSelected( item: MenuItem): Boolean {
+
+        when(item.itemId){
+            R.id.fav_btn -> {
+                Toast.makeText(this, "favourites icon", Toast.LENGTH_SHORT).show()
+            }
+            R.id.settings_btn -> {
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.logout_btn -> {
+                Toast.makeText(this, "logout icon", Toast.LENGTH_SHORT).show()
+            }
         }
-
-
+        return super.onOptionsItemSelected(item)
     }
 }

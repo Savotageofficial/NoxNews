@@ -1,7 +1,11 @@
 package com.example.noxnews
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -52,6 +56,9 @@ class MainActivity : AppCompatActivity() {
             // Back is pressed... Finishing the activity
             finish()
         }
+        val toolbar = binding.toolbar
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
     private fun loadNews(conID : String , catID : String){
@@ -94,6 +101,29 @@ class MainActivity : AppCompatActivity() {
         val adapter = NewsAdapter(this , articles)
         binding.newsList.adapter = adapter
 
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        menuInflater.inflate(R.menu.menu , menu)
+        return super.onCreateOptionsMenu(menu)
+
+    }
+
+    override fun onOptionsItemSelected( item: MenuItem): Boolean {
+
+        when(item.itemId){
+            R.id.fav_btn -> {
+                Toast.makeText(this, "favourites icon", Toast.LENGTH_SHORT).show()
+            }
+            R.id.settings_btn -> {
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.logout_btn -> {
+                Toast.makeText(this, "logout icon", Toast.LENGTH_SHORT).show()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 
