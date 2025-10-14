@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.noxnews.AuthRepository.logout
 import com.example.noxnews.databinding.ActivityHomeBinding
 import javax.annotation.Nonnull
 
@@ -101,8 +102,8 @@ class HomeActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             R.id.logout_btn -> {
-                Toast.makeText(this, "logout icon", Toast.LENGTH_SHORT).show()
-            }
+                logout()
+                finishAffinity()            }
         }
         return super.onOptionsItemSelected(item)
     }

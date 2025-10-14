@@ -18,6 +18,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import androidx.activity.addCallback
+import com.example.noxnews.AuthRepository.logout
 
 
 class MainActivity : AppCompatActivity() {
@@ -120,7 +121,8 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             R.id.logout_btn -> {
-                Toast.makeText(this, "logout icon", Toast.LENGTH_SHORT).show()
+                logout()
+                finishAffinity()
             }
         }
         return super.onOptionsItemSelected(item)

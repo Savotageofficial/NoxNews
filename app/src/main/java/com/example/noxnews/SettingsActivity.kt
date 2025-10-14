@@ -73,7 +73,10 @@ class SettingsActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-        binding.logout.setOnClickListener { AuthRepository.logout() }
+        binding.logout.setOnClickListener {
+            AuthRepository.logout()
+            finishAffinity()
+        }
         binding.favourites.setOnClickListener { /* handle favourites */ }
     }
 }
