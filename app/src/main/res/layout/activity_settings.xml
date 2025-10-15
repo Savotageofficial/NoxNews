@@ -1,79 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-     android:id="@+id/main"
-    android:orientation="vertical"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@drawable/gradiant_background">
+    android:background="@drawable/gradiant_background"
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <!-- Title -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:gravity="center"
         android:text="Settings"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginBottom="24dp"/>
+        android:textStyle="bold" />
 
     <!-- Region -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="12dp"
         android:layout_marginBottom="12dp"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="12dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="🌍"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:text="Region"
             android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:layout_marginStart="8dp"/>
+            android:textSize="18sp" />
 
         <Spinner
             android:id="@+id/spinner_region"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:spinnerMode="dropdown"
             android:backgroundTint="#FFFFFF"
-            android:popupBackground="#2C2C3E"/>
+            android:popupBackground="#2C2C3E"
+            android:spinnerMode="dropdown" />
     </LinearLayout>
 
     <!-- Favourites -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
         android:orientation="horizontal"
-        android:padding="12dp"
-        android:layout_marginBottom="12dp">
+        android:padding="12dp">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@android:drawable/btn_star_big_on"
-            app:tint="#FFD700"/>
+            app:tint="#FFD700" />
 
         <TextView
             android:id="@+id/favourites"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
             android:text="Favourites"
             android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:layout_marginStart="12dp"/>
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -81,24 +80,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:orientation="horizontal"
-        android:padding="12dp"
-        android:layout_marginTop="16dp">
+        android:padding="12dp">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@android:drawable/ic_lock_power_off"
-            app:tint="#FF5252"/>
+            app:tint="#FF5252" />
 
         <TextView
             android:id="@+id/logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
             android:text="Log Out"
             android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:layout_marginStart="12dp"/>
+            android:textSize="18sp" />
 
     </LinearLayout>
 

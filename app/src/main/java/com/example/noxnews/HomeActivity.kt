@@ -30,45 +30,47 @@ class HomeActivity : AppCompatActivity() {
             insets
         }
 
+        binding.welcomeText.text = "Welcome ${intent.getStringExtra("username")}"
+
 
         binding.btn1.setOnClickListener {
 
             val intent = Intent(this , MainActivity::class.java)
-            intent.putExtra("catID" , "general")
+            intent.putExtra("catID" , "General")
             startActivity(intent)
 
         }
         binding.btn2.setOnClickListener {
 
             val intent = Intent(this , MainActivity::class.java)
-            intent.putExtra("catID" , "sports")
+            intent.putExtra("catID" , "Sports")
             startActivity(intent)
 
         }
         binding.btn3.setOnClickListener {
 
             val intent = Intent(this , MainActivity::class.java)
-            intent.putExtra("catID" , "entertainment")
+            intent.putExtra("catID" , "Entertainment")
             startActivity(intent)
 
         }
         binding.btn4.setOnClickListener {
 
             val intent = Intent(this , MainActivity::class.java)
-            intent.putExtra("catID" , "health")
+            intent.putExtra("catID" , "Health")
             startActivity(intent)
 
         }
         binding.btn5.setOnClickListener {
 
             val intent = Intent(this , MainActivity::class.java)
-            intent.putExtra("catID" , "science")
+            intent.putExtra("catID" , "Science")
             startActivity(intent)
         }
         binding.btn6.setOnClickListener {
 
             val intent = Intent(this , MainActivity::class.java)
-            intent.putExtra("catID" , "technology")
+            intent.putExtra("catID" , "Technology")
             startActivity(intent)
 
         }
@@ -95,7 +97,7 @@ class HomeActivity : AppCompatActivity() {
 
         when(item.itemId){
             R.id.fav_btn -> {
-                Toast.makeText(this, "favourites icon", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, FavoritesActivity::class.java))
             }
             R.id.settings_btn -> {
                 val intent = Intent(this, SettingsActivity::class.java)
@@ -103,7 +105,8 @@ class HomeActivity : AppCompatActivity() {
             }
             R.id.logout_btn -> {
                 logout()
-                finishAffinity()            }
+                finishAffinity()
+            startActivity(Intent(this, LoginActivity::class.java))}
         }
         return super.onOptionsItemSelected(item)
     }

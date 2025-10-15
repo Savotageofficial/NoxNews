@@ -30,7 +30,6 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-
         <TextView
             android:id="@+id/genre_tv"
             android:layout_width="wrap_content"
@@ -43,7 +42,7 @@
             android:shadowDy="4"
             android:shadowRadius="4"
             android:textSize="24sp"
-            tools:text="General" />
+            android:text="Favorites" />
 
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -55,11 +54,11 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/news_list"
+                android:id="@+id/favourites_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/article_list_item" />
+                tools:listitem="@layout/item_favorite_news" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
@@ -70,5 +69,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/emptyView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No favorites yet"
+        android:textSize="18sp"
+        android:visibility="gone"
+        android:layout_gravity="center" />
+
 
 </FrameLayout>

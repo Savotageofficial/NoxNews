@@ -16,7 +16,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/article_img"
+            android:id="@+id/newsImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
@@ -31,7 +31,7 @@
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
-            android:id="@+id/article_text"
+            android:id="@+id/titleText"
             style="@style/TVstyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -61,15 +61,16 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/favorite_btn"
+            android:id="@+id/removeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:backgroundTint="@color/white"
-            android:src="@drawable/baseline_star_outline_24"
+            android:src="@drawable/baseline_remove_circle_24"
             app:layout_constraintBottom_toBottomOf="@id/share_fab"
             app:layout_constraintEnd_toStartOf="@id/share_fab"
-            app:layout_constraintTop_toTopOf="@id/share_fab" />
+            app:layout_constraintTop_toTopOf="@id/share_fab"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

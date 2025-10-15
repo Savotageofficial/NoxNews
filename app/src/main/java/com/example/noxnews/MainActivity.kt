@@ -44,25 +44,31 @@ class MainActivity : AppCompatActivity() {
 
         binding.genreTv.text = receivedCategory
 
-        Log.d("trace" , receivedCategory!!)
-        Log.d("trace" , receivedCountry)
+        Log.d("trace", receivedCategory!!)
+        Log.d("trace", receivedCountry)
 
-        loadNews(conID = receivedCountry , catID = receivedCategory)
+        loadNews(conID = receivedCountry, catID = receivedCategory)
 
-        binding.swipeRefresh.setOnRefreshListener { loadNews(conID = receivedCountry , catID = receivedCategory) }
+        binding.swipeRefresh.setOnRefreshListener {
+            loadNews(
+                conID = receivedCountry,
+                catID = receivedCategory
+            )
+        }
 
 
 
-        onBackPressedDispatcher.addCallback(this ) {
+        onBackPressedDispatcher.addCallback(this) {
             // Back is pressed... Finishing the activity
             finish()
         }
         val toolbar = binding.toolbar
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+        
     }
 
-    private fun loadNews(conID : String , catID : String){
+    private fun loadNews(conID: String, catID: String) {
         val retro = Retrofit
             .Builder()
             .baseUrl("https://newsapi.org")
@@ -72,7 +78,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        c.getNews(countryID = conID  , categoryID = catID).enqueue(object : Callback<News>{
+        c.getNews(countryID = conID, categoryID = catID).enqueue(object : Callback<News> {
             override fun onResponse(
                 call: Call<News?>,
                 response: Response<News?>
@@ -80,7 +86,7 @@ class MainActivity : AppCompatActivity() {
                 val news = response.body()
                 val articles = news?.articles ?: arrayListOf()
 
-                articles.removeAll{
+                articles.removeAll {
                     it.title == "[Removed]"
                 }
 //                Log.d("trace" , "Articles: $articles")
@@ -93,33 +99,37 @@ class MainActivity : AppCompatActivity() {
                 call: Call<News?>,
                 t: Throwable
             ) {
-                Log.d("trace" , "Error: ${t.message}")
+                Log.d("trace", "Error: ${t.message}")
                 binding.progress.isVisible = false
             }
         })
     }
-    private fun showNews(articles: ArrayList<Article>){
-        val adapter = NewsAdapter(this , articles)
+
+    private fun showNews(articles: ArrayList<Article>) {
+        val adapter = NewsAdapter(this, articles)
         binding.newsList.adapter = adapter
 
     }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
-        menuInflater.inflate(R.menu.menu , menu)
+        menuInflater.inflate(R.menu.menu, menu)
         return super.onCreateOptionsMenu(menu)
 
     }
 
-    override fun onOptionsItemSelected( item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        when(item.itemId){
+        when (item.itemId) {
             R.id.fav_btn -> {
-                Toast.makeText(this, "favourites icon", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, FavoritesActivity::class.java))
             }
+
             R.id.settings_btn -> {
                 val intent = Intent(this, SettingsActivity::class.java)
                 startActivity(intent)
             }
+
             R.id.logout_btn -> {
                 logout()
                 finishAffinity()
@@ -127,9 +137,6 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
-
-
 
 
 }

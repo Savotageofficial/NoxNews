@@ -25,7 +25,9 @@ class NewsAdapter(val a: Activity, val articles: ArrayList<Article>) :
         parent: ViewGroup,
         viewType: Int
     ): NewsViewHolder {
-        val b = ArticleListItemBinding.inflate(LayoutInflater.from(parent.context) , parent , false)
+        val b = ArticleListItemBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
+        )
         return NewsViewHolder(b)
     }
 
@@ -57,14 +59,24 @@ class NewsAdapter(val a: Activity, val articles: ArrayList<Article>) :
                 .startChooser()
 
         }
-        holder.binding.favaddBtn.setOnClickListener {
-                holder.binding.favaddBtn.setImageResource(R.drawable.baseline_star_24)
+        holder.binding.favoriteBtn.setOnClickListener {
+            holder.binding.favoriteBtn.setImageResource(R.drawable.baseline_star_24)
+            val favorite = FavoriteNews(
+                title = articles[position].title,
+                imageUrl = articles[position].urlToImage,
+                articleUrl = articles[position].url
+            )
+
+            FavoritesRepository.addToFavorites(favorite) { success ->
+                if (success) Toast.makeText(holder.itemView.context, "Added to favorites", Toast.LENGTH_SHORT).show()
+                else Toast.makeText(holder.itemView.context, "Failed", Toast.LENGTH_SHORT).show()
+            }
+
 
         }
     }
 
     override fun getItemCount() = articles.size
-
 
 
 }
