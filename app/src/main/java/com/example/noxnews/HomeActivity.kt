@@ -100,7 +100,7 @@ class HomeActivity : AppCompatActivity() {
             R.id.logout_btn -> {
                 logout()
                 finishAffinity()
-            startActivity(Intent(this, LoginActivity::class.java))}
+                startActivity(Intent(this, LoginActivity::class.java))}
         }
         return super.onOptionsItemSelected(item)
     }

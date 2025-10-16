@@ -78,7 +78,10 @@ class SettingsActivity : AppCompatActivity() {
         binding.logout.setOnClickListener {
             logout()
             finishAffinity()
+            startActivity(Intent(this, LoginActivity::class.java))
         }
+
+
         binding.favourites.setOnClickListener {
             startActivity(Intent(this, FavoritesActivity::class.java))
 
