@@ -34,11 +34,18 @@ class HomeActivity : AppCompatActivity() {
             insets
         }
 
-        val userid = Firebase.auth.uid
+        val userid = Firebase.auth.currentUser?.uid
 
-        val username = getUserData(uid = userid).result.name
+        if (userid != null) {
+            getUserData(userid).addOnSuccessListener { user ->
+                if (user != null) {
+                    val username = user.name
+                    binding.welcomeText.text = "Welcome ${username}"
+                }
+            }
+        }
 
-        binding.welcomeText.text = "Welcome ${username}"
+
 
         val intent = Intent(this , MainActivity::class.java)
 
