@@ -1,5 +1,6 @@
 package com.example.noxnews
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.noxnews.AuthRepository.logout
 import com.example.noxnews.databinding.ActivitySettingsBinding
 
 class SettingsActivity : AppCompatActivity() {
@@ -59,7 +61,7 @@ class SettingsActivity : AppCompatActivity() {
                 parent: AdapterView<*>,
                 view: View,
                 position: Int,
-                id: Long
+                id: Long,
             ) {
                 if (isFirstSelection) {
                     isFirstSelection = false
@@ -74,9 +76,12 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         binding.logout.setOnClickListener {
-            AuthRepository.logout()
+            logout()
             finishAffinity()
         }
-        binding.favourites.setOnClickListener { /* handle favourites */ }
+        binding.favourites.setOnClickListener {
+            startActivity(Intent(this, FavoritesActivity::class.java))
+
+        }
     }
 }

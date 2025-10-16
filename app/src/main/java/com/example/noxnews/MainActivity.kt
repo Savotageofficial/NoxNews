@@ -130,10 +130,13 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
 
-            R.id.logout_btn -> {
-                logout()
-                finishAffinity()
-            }
+//            R.id.logout_btn -> {
+//                logout()
+//                Log.d("trace" , "closed app")
+//                finishAffinity()
+//
+//
+//            }
         }
         return super.onOptionsItemSelected(item)
     }
