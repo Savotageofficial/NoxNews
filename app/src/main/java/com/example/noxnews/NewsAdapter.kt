@@ -60,7 +60,6 @@ class NewsAdapter(val a: Activity, val articles: ArrayList<Article>) :
 
         }
         holder.binding.favoriteBtn.setOnClickListener {
-            holder.binding.favoriteBtn.setImageResource(R.drawable.baseline_star_24)
             val favorite = FavoriteNews(
                 title = articles[position].title,
                 imageUrl = articles[position].urlToImage,
