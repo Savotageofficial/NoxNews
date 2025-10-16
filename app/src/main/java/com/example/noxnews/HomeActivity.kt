@@ -30,46 +30,40 @@ class HomeActivity : AppCompatActivity() {
             insets
         }
 
-        binding.welcomeText.text = "Welcome ${intent.getStringExtra("username")}"
 
+
+        val intent = Intent(this , MainActivity::class.java)
 
         binding.btn1.setOnClickListener {
 
-            val intent = Intent(this , MainActivity::class.java)
             intent.putExtra("catID" , "General")
             startActivity(intent)
 
         }
         binding.btn2.setOnClickListener {
 
-            val intent = Intent(this , MainActivity::class.java)
             intent.putExtra("catID" , "Sports")
             startActivity(intent)
 
         }
         binding.btn3.setOnClickListener {
 
-            val intent = Intent(this , MainActivity::class.java)
             intent.putExtra("catID" , "Entertainment")
             startActivity(intent)
 
         }
         binding.btn4.setOnClickListener {
 
-            val intent = Intent(this , MainActivity::class.java)
             intent.putExtra("catID" , "Health")
             startActivity(intent)
 
         }
         binding.btn5.setOnClickListener {
 
-            val intent = Intent(this , MainActivity::class.java)
             intent.putExtra("catID" , "Science")
             startActivity(intent)
         }
         binding.btn6.setOnClickListener {
-
-            val intent = Intent(this , MainActivity::class.java)
             intent.putExtra("catID" , "Technology")
             startActivity(intent)
 
