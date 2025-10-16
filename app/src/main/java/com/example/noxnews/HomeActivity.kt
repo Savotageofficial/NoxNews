@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.noxnews.AuthRepository.getUserData
 import com.example.noxnews.AuthRepository.logout
 import com.example.noxnews.databinding.ActivityHomeBinding
 import javax.annotation.Nonnull
@@ -31,6 +32,10 @@ class HomeActivity : AppCompatActivity() {
         }
 
 
+
+        val username = getUserData()
+
+        binding.welcomeText.text =
 
         val intent = Intent(this , MainActivity::class.java)
 
