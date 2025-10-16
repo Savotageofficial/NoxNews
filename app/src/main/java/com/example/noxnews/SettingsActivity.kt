@@ -1,5 +1,6 @@
 package com.example.noxnews
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -77,6 +78,8 @@ class SettingsActivity : AppCompatActivity() {
             AuthRepository.logout()
             finishAffinity()
         }
-        binding.favourites.setOnClickListener { /* handle favourites */ }
+        binding.favourites.setOnClickListener {
+            startActivity(Intent(this, FavoritesActivity::class.java))
+        }
     }
 }
