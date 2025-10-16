@@ -13,6 +13,9 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.noxnews.AuthRepository.getUserData
 import com.example.noxnews.AuthRepository.logout
 import com.example.noxnews.databinding.ActivityHomeBinding
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
+import com.google.firebase.firestore.firestore
 import javax.annotation.Nonnull
 
 class HomeActivity : AppCompatActivity() {
@@ -31,11 +34,11 @@ class HomeActivity : AppCompatActivity() {
             insets
         }
 
+        val userid = Firebase.auth.uid
 
+        val username = getUserData(uid = userid).result.name
 
-        val username = getUserData()
-
-        binding.welcomeText.text =
+        binding.welcomeText.text = "Welcome ${username}"
 
         val intent = Intent(this , MainActivity::class.java)
 
