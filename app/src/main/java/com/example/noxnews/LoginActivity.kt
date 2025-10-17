@@ -47,6 +47,12 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            binding.tvForgotPass.setOnClickListener {
+                val intent = Intent(this , ForgotPasswordActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+
             //disables the  button till i get your stuff
             binding.btnLogin.isEnabled = false
 
