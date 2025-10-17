@@ -1,5 +1,6 @@
 package com.example.noxnews
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -35,7 +36,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         // Password reset email sent successfully
                         Toast.makeText(this, "Password reset email sent to $emailAddress", Toast.LENGTH_SHORT).show()
-                        finish() // Go back to the login screen
+                        startActivity(Intent(this, LoginActivity::class.java)) // Go back to the login screen
                     } else {
                         // Handle the error (e.g., email not found, network issues)
                         Toast.makeText(this, "Error sending password reset email: ${task.exception?.message}", Toast.LENGTH_LONG).show()
