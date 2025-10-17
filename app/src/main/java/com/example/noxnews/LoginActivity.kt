@@ -58,6 +58,14 @@ class LoginActivity : AppCompatActivity() {
             binding.btnLogin.isEnabled = false
 
             AuthRepository.login(email, password).addOnSuccessListener {
+                val user = FirebaseService.auth.currentUser
+                if (user != null && !user.isEmailVerified) {
+                    FirebaseService.auth.signOut()
+                    Toast.makeText(this, "Verify your email before logging in.", Toast.LENGTH_LONG).show()
+                    binding.btnLogin.isEnabled = true
+                    return@addOnSuccessListener
+                }//checks if it is verified
+
                 val intent = Intent(this, HomeActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 }// DON'T DELETE THIS, it exits the app if pressed on back instead of login screen

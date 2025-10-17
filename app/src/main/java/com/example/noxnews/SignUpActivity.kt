@@ -24,19 +24,13 @@ class SignUpActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        if (FirebaseService.auth.currentUser != null) {
-            val intent = Intent(this, HomeActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            }
-            startActivity(intent)
-            finish()
-            return
-        }// skips login if logged in, also exits app without returning to sign up.
+
+        //checkIfLoggedIn()//if logged in, moves to home activity right away, wingardium liviosa type stuff
 
         binding.tvLogin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
-        }
+        }//starts login activity when clicked "already have an account?"
 
         binding.btnSignup.setOnClickListener {
             val name = binding.etName.text.toString().trim()
@@ -57,21 +51,74 @@ class SignUpActivity : AppCompatActivity() {
             binding.btnSignup.isEnabled = false
             binding.loadingProgress.isVisible = true
 
-            AuthRepository.signUp(name,email, password)
-                .addOnSuccessListener {
-                    val intent = Intent(this, HomeActivity::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    }
-                    startActivity(intent.putExtra("username", name))
-                    finish()
+
+            //verify email while signing up, so we can reuse auth repo as much as we like.
+            AuthRepository.signUp(name, email, password)
+                .addOnSuccessListener { result ->
+                    val user = FirebaseService.auth.currentUser
+
+                    user?.sendEmailVerification()
+                        ?.addOnSuccessListener {
+                            Toast.makeText(
+                                this,
+                                "Verification email sent. Check your inbox.",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            FirebaseService.auth.signOut()
+                            startActivity(Intent(this, LoginActivity::class.java))
+                            finish()//moves to login so u login with only authenticated email
+                        }
+                        ?.addOnFailureListener { e ->
+                            Toast.makeText(
+                                this,
+                                "Failed to send verification email: ${e.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            binding.btnSignup.isEnabled =
+                                true //unlocks the btn for you to try again
+                            binding.loadingProgress.isVisible = false
+                        }
                 }
                 .addOnFailureListener { e ->
                     Toast.makeText(this, "Signup failed: ${e.message}", Toast.LENGTH_SHORT).show()
                     binding.btnSignup.isEnabled = true
-                    binding.loadingProgress.isVisible = false
+                    binding.loadingProgress.isVisible = false //to make it extra invisible
                 }
+
 
         }
 
     }
+    private fun checkIfLoggedIn() {
+        val user = FirebaseService.auth.currentUser
+
+        if (user == null) {
+            Toast.makeText(this, "No user logged in.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Reload user data from Firebase server
+        user.reload()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val refreshedUser = FirebaseService.auth.currentUser
+                    if (refreshedUser != null && refreshedUser.isEmailVerified) {
+                        Toast.makeText(this, "Welcome back, verified user!", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, HomeActivity::class.java).apply {
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        }
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        Toast.makeText(this, "Your email is not verified.", Toast.LENGTH_SHORT).show()
+                        FirebaseService.auth.signOut()
+                    }
+                } else {
+                    Toast.makeText(this, "Failed to reload user data.", Toast.LENGTH_SHORT).show()
+                    FirebaseService.auth.signOut()
+                }
+            }
+    }//toke it outside for readability
+
+
 }
