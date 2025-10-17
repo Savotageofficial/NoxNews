@@ -39,13 +39,22 @@ class MainActivity : AppCompatActivity() {
 
         // youssef added country shared pref
         val sharedPref = getSharedPreferences("AppSettings", MODE_PRIVATE)
-        val receivedCategory = intent.getStringExtra("catID")
+        val receivedCat = intent.getStringExtra("catID")
         val receivedCountry = sharedPref.getString("region", "eg") ?: "eg"
+
+
+        val receivedCategory : String
+        if (receivedCat == null){
+            receivedCategory = "null"
+        }
+        else{
+            receivedCategory = receivedCat
+        }
 
         binding.genreTv.text = receivedCategory
 
-        Log.d("trace", receivedCategory!!)
-        Log.d("trace", receivedCountry)
+//        Log.d("trace", receivedCategory!!)
+//        Log.d("trace", receivedCountry)
 
         loadNews(conID = receivedCountry, catID = receivedCategory)
 

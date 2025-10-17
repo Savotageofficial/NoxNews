@@ -26,6 +26,7 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         //checkIfLoggedIn()//if logged in, moves to home activity right away, wingardium liviosa type stuff
+        checkIfLoggedIn()
 
         binding.tvLogin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
