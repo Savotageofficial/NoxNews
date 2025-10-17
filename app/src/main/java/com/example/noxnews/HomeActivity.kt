@@ -45,8 +45,6 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
-
-
         val intent = Intent(this , MainActivity::class.java)
 
         binding.btn1.setOnClickListener {
