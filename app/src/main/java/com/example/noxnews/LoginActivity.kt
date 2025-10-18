@@ -72,7 +72,7 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }.addOnFailureListener { e ->
-                Toast.makeText(this, "u missed up: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "u missed up: ${e.message}", Toast.LENGTH_LONG).show()
                 binding.btnLogin.isEnabled = true //return button functionality
             }
         }

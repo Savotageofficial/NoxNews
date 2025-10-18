@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -43,25 +42,22 @@ class MainActivity : AppCompatActivity() {
         val receivedCountry = sharedPref.getString("region", "eg") ?: "eg"
 
 
-        val receivedCategory : String
+        val recievedCategory : String
         if (receivedCat == null){
-            receivedCategory = "null"
+            recievedCategory = "null"
         }
         else{
-            receivedCategory = receivedCat
+            recievedCategory = receivedCat
         }
 
-        binding.genreTv.text = receivedCategory
+        binding.genreTv.text = recievedCategory
 
-//        Log.d("trace", receivedCategory!!)
-//        Log.d("trace", receivedCountry)
-
-        loadNews(conID = receivedCountry, catID = receivedCategory)
+        loadNews(conID = receivedCountry, catID = recievedCategory)
 
         binding.swipeRefresh.setOnRefreshListener {
             loadNews(
                 conID = receivedCountry,
-                catID = receivedCategory
+                catID = recievedCategory
             )
         }
 
@@ -139,13 +135,13 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
 
-//            R.id.logout_btn -> {
-//                logout()
-//                Log.d("trace" , "closed app")
-//                finishAffinity()
-//
-//
-//            }
+            R.id.logout_btn -> {
+                logout()
+                Log.d("trace" , "closed app")
+                finishAffinity()
+
+
+            }
         }
         return super.onOptionsItemSelected(item)
     }
