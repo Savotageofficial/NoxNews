@@ -14,12 +14,6 @@ object ThemeHelper {
         setMode(mode)
     }
 
-    fun setAndSaveTheme(context: Context, mode: String) {
-        // mode must be "system" | "light" | "dark"
-        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        prefs.edit { putString(KEY_THEME, mode) }
-        setMode(mode)
-    }
 
     private fun setMode(mode: String) {
         when (mode) {
