@@ -65,11 +65,5 @@ object AuthRepository {
         }
     }
 
-    fun deleteAccount(): Task<Void>? {
-        val user = auth.currentUser
-        val uid = user?.uid ?: return null
 
-        db.collection("users").document(uid).delete()
-        return user.delete()
-    }
 }
