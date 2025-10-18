@@ -137,8 +137,8 @@ class MainActivity : AppCompatActivity() {
 
             R.id.logout_btn -> {
                 logout()
-                Log.d("trace" , "closed app")
                 finishAffinity()
+                startActivity(Intent(this, LoginActivity::class.java))
 
 
             }
